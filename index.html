@@ -119,10 +119,10 @@ function TickerSearch({value, onSelect, C, dark}){
   },[]);
 
   const searchLocal=q=>{
-    const kw=q.toLowerCase().replace(/\s/g,"");
+    const kw=q.toLowerCase();
     return KR_STOCKS.filter(s=>
-      s.name.toLowerCase().replace(/\s/g,"").includes(kw)||
-      s.symbol.includes(kw)
+      s.name.toLowerCase().includes(kw)||
+      s.symbol.toLowerCase().includes(kw)
     ).slice(0,6).map(s=>({symbol:s.symbol,shortname:s.name,exchDisp:"KRX"}));
   };
 
