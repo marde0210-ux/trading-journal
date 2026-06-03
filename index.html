@@ -79,8 +79,8 @@ function TickerSearch({value, onSelect, C, dark}){
     if(q.length<1){setResults([]);setOpen(false);return;}
     setLoading(true);
     try{
-      const proxyUrl='https://corsproxy.io/?';const targetUrl=`https://query1.finance.yahoo.com/v1/finance/search?q=${encodeURIComponent(q)}&quotesCount=8&newsCount=0&enableFuzzyQuery=false`;const res=await fetch(proxyUrl+encodeURIComponent(targetUrl));
-      const data=await res.json();
+      const res=await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://query1.finance.yahoo.com/v1/finance/search?q='+encodeURIComponent(q)+'&quotesCount=8&newsCount=0')}`);
+      const raw=await res.json();const data=typeof raw.contents==="string"?JSON.parse(raw.contents):raw;
       const quotes=(data.quotes||[]).filter(q=>q.symbol&&q.shortname||q.longname);
       setResults(quotes.slice(0,6));
       setOpen(true);
